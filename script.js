@@ -8,16 +8,13 @@ $(document).ready(function () {
     $('#textarea1').val('New Text');
     M.textareaAutoResize($('#textarea1'));
 
+
     //Build in Javascript that allows dropdown option to determine what text will go into text area
 
-    function input() {
-
-    var select = $('#organization-search');
-    var input = $('#textarea1');
-    select.change(function () {
-        input.value = select.value;
+    $('#organization-search').on('change', function() {
+        $('#textarea1').val($('#organization-search option:selected').val());
     });
-}
+
     //Build in Javascript for Charity Navigator API calls, based on name, city, state or keyword
 
     function search(input) {
