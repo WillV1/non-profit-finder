@@ -1,16 +1,36 @@
 $(document).ready(function () {
 
-M.AutoInit();
-$('.dropdown-trigger').dropdown();
+    M.AutoInit();
+    $(document).ready(function () {
+        $('select').formSelect();
+    });
 
-//Build in Javascript for Charity Navigator API calls, based on name, home country or countries served
+    $('#textarea1').val('New Text');
+    M.textareaAutoResize($('#textarea1'));
 
-var url = 'https://api.data.charitynavigator.org/v2'
+    //Build in Javascript that allows dropdown option to determine what text will go into text area
 
-//Build in Javascript for API call to coincide with search parameters 
+    function input() {
 
-//Build in Javascript for card to display charity information based on API call
+    var select = $('#organization-search');
+    var input = $('#textarea1');
+    select.change(function () {
+        input.value = select.value;
+    });
+}
+    //Build in Javascript for Charity Navigator API calls, based on name, city, state or keyword
 
-// Build in functionality so that user can click link to go to organization's home page
+    function search(input) {
+        $('.large').html(' ');
+
+    var url = 'https://api.data.charitynavigator.org/v2/Organizations?app_id=f23e3059&app_key=e0734aa01e43908655ef9c264f6dcf2e&pageSize=10&search=food&state=NC&city=raleigh'
+
+    //Build in Javascript for API call to coincide with search parameters 
+
+    //Build in Javascript for card to display charity information based on API call
+
+    // Build in functionality so that user can click link to go to organization's home page
+
+    };
 
 });
