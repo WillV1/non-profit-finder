@@ -1,0 +1,9 @@
+body {
+    background-image: url(tim-marshall-cAtzHUz7Z8g-unsplash.jpg);
+    background-size: cover;
+    opacity: 0.8;
+    background-position: center;
+    background-attachment: fixed;
+    height: 100%;
+    background-repeat: no-repeat;
+  }
