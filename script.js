@@ -46,26 +46,32 @@ $(document).ready(function () {
             url: baseURL + endingURL,
             method: "GET"
         }).then(function (response) {
-            console.log(response);
+            //console.log(response);
 
-            //var orgArray = [];
+            function returnResults() {
 
-            for (var i = 0; i <= 10; i++) {
-                var orgList = ([Math.floor(Math.random() * response[i].charityName.length)]);
-                console.log(orgList);
-                var orgDisplay = $('<p>');
-                orgDisplay.text(response[i].charityName);
-                orgDisplay.attr("id", "charity-name");
-                orgWebsiteOne = $("<a>");
-                orgWebsiteOne.attr("id", "website");
-                orgWebsiteOne.attr("href", response[i].charityNavigatorURL);
-                orgWebsiteOne.attr("target", "_blank");
-                orgWebsiteOne.text(response[i].charityName);
-                orgWebsiteOne.addClass("link");
-                $('.large').html(orgDisplay);
-                $('#charity-name').append(orgWebsiteOne);
+                var orgArray = [];
+                orgArray.push(response);
+                console.log(orgArray);
+                
+                 for (var i = 0; i < 10; i++) {
+                    
+                    var random = orgArray[0][(Math.floor(Math.random() * orgArray[0].length))];
+                    console.log(random);
+                    var orgDisplay = $('<p>');
+                    orgDisplay.text(random.charityName);
+                    orgDisplay.attr("id", "charity-name");
+                    orgWebsiteOne = $("<a>");
+                    orgWebsiteOne.attr("id", "website");
+                    orgWebsiteOne.attr("href", random.charityNavigatorURL);
+                    orgWebsiteOne.attr("target", "_blank");
+                    orgWebsiteOne.text(random.charityName);
+                    orgWebsiteOne.addClass("link");
+                    $('.large').html(orgDisplay);
+                    $('#charity-name').append(orgWebsiteOne);
+                     }
             }
-
+            returnResults()
         });
 
         //Build in Javascript for card to display charity information based on API call
