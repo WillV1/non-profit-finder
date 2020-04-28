@@ -63,27 +63,17 @@ $(document).ready(function () {
 
                     var random = orgArray[0][(Math.floor(Math.random() * orgArray[0].length))];
                     console.log(random);
-                    var orgDisplay = $('<p>');
-                    orgDisplay.text(random.charityName);
                     var orgWebsiteOne = $("<a>");
                     orgWebsiteOne.attr("id", "website");
                     orgWebsiteOne.attr("href", random.charityNavigatorURL);
                     orgWebsiteOne.attr("target", "_blank");
                     orgWebsiteOne.text(random.charityName);
                     orgWebsiteOne.addClass("link");
-                    $('.medium').append(orgDisplay);
-                    orgDisplay.append(orgWebsiteOne);
+                    $('.medium').append(orgWebsiteOne);
                 }
             }
             returnResults()
         });
-
-
-
-
-
-
-        // Build in functionality so that user can click link to go to organization's home page
 
 
         //Allow for local storage of previous 5 searches
