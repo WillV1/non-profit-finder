@@ -6,12 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Charity Finder</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-    <link
-      rel="stylesheet"
-      href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
-      integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf"
-      crossorigin="anonymous"
-    />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+        integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous" />
     <link rel="stylesheet" href="style.css" />
 </head>
 
@@ -23,53 +19,62 @@
             </div>
         </div>
         <div class="row">
-            <div class="left-align white-text col s6"><h5>Search for Non-Profit by:</h5></div>
+            <div class="left-align white-text col s6">
+                <h5>Search for Non-Profit by:</h5>
+            </div>
         </div>
         <div class="input-field col s4">
             <select id="organization-search">
-              <option value="" disabled selected>Choose your option</option>
-              <option value="state">Organization State (two letter abbreviation)</option>
-              <option value="zip">Organization Zip Code</option>
-              <option value="keyword">Organization Keyword</option>
+                <option value="" disabled selected>Choose your option</option>
+                <option value="state">Organization State (two letter abbreviation)</option>
+                <option value="zip">Organization Zip Code</option>
+                <option value="keyword">Organization Keyword</option>
             </select>
-          </div>
-          <div class="row">
+        </div>
+        <div class="row">
             <form class="col s8">
-              <div class="row">
-                <div class="input-field col s8">
-                  <textarea id="textarea1" class="materialize-textarea"></textarea>
-                  <label for="textarea1">Enter Search Terms Here</label>
+                <div class="row">
+                    <div class="input-field col s8">
+                        <textarea id="textarea1" class="materialize-textarea"></textarea>
+                        <label for="textarea1">Enter Search Terms Here</label>
+                    </div>
                 </div>
-              </div>
             </form>
-          </div>
+        </div>
         <div class="row">
             <button id="button" class="btn waves-effect waves-light" type="submit" name="action">Search
                 <i class="material-icons right"></i>
-              </button>
+            </button>
         </div>
-        <ul class="collection with-header">
-            <li class="collection-header title"><h6>Recent Searches</h6></li>
-          </ul>
+        <ul class="collection with-header search-history">
+            <li class="collection-header previous-searches"></li>
+                <h6>Recent Searches</h6>
+            </li>
+        </ul>
         <div class="card medium">
             <!-- Card Content -->
-          </div>
+        </div>
         <footer class="page-footer">
             <div class="container">
                 <div class="row">
                     <div class="col l6 s12">
-                      <p class="grey-text text-lighten-4">Photo by Tim Marshall on Unsplash</p>
+                        <p class="grey-text text-lighten-4">Photo by Alan Chen on Unsplash</p>
+                        <div id="date"></div>
                     </div>
-                    </div>
-                  </div>
-            <div class="footer-copyright">
-              <div class="container">
-               Produced in 2020
-              <a class="grey-text text-lighten-4 right" href="https://github.com/WillV1" target="_blank">See Me at GitHub <i class="fab fa-github fa-2x"></i></a>
-              
-              </div>
+                </div>
             </div>
-          </footer>
+            <div class="footer-copyright">
+                <div class="container">
+                    <div class="row">
+                        <div class="col 16 s12">
+                            Produced in 2020
+                            <a class="grey-text text-lighten-4 right" href="https://github.com/WillV1"
+                                target="_blank">See Me at GitHub <i class="fab fa-github fa-2x"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
     </div>
 
 
