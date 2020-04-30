@@ -25,46 +25,49 @@ $(document).ready(function () {
     //Build in Javascript for Charity Navigator API calls, based on name, state or category
     //Build in Javascript for API call to coincide with search parameters
     //Allow for local storage of previous 5 searches
-    function storeSearches() {
-        $('.search-history').empty()
-        var recentSearches = JSON.parse(localStorage.getItem('searches')) || []
+    // function storeSearches() {
+        // $('.search-history').empty()
+        // var recentSearches = JSON.parse(localStorage.getItem('searches')) || []
         //console.log(recentSearches);
-        for (var i = 0; i < recentSearches.length; i++) {
-            while (recentSearches.length > 5) {
-                var lastFive = recentSearches.length - 5;
-                var index = 0;
-                recentSearches.splice(index, lastFive);
-                index++
-            }
-            var previousSearch = $('<li>')
-            previousSearch.addClass("list-group-item");
-            previousSearch.text(recentSearches[i].name)
-            $('.previous-searches').append(previousSearch);
+        // for (var i = 0; i < recentSearches.length; i++) {
+        //     while (recentSearches.length > 5) {
+        //         var lastFive = recentSearches.length - 5;
+        //         var index = 0;
+        //         recentSearches.splice(index, lastFive);
+        //         index++
+        //     }
+        //     var previousSearch = $('<li>')
+        //     previousSearch.addClass("list-group-item");
+        //     previousSearch.text(recentSearches[i].name)
+        //     $('.previous-searches').append(previousSearch);
 
 
-        }
-        console.log(recentSearches);
-    }
-    storeSearches()
+        // }
+    //     console.log(recentSearches);
+    // }
+    // storeSearches()
 
 
     $('#button').on('click', function (event) {
         event.preventDefault();
         var searchParam = myTextBox.val();
 
-        var lastSearched = $('.search-history');
+        // var lastSearched = $('.search-history');
 
-        var recentSearches = JSON.parse(localStorage.getItem('searches')) || [];
-        $('.previous-searches').val(recentSearches);
-        var searchList = {
-            name: lastSearched
-        };
+        // var recentSearches = JSON.parse(localStorage.getItem('searches')) || [];
+        // $('.previous-searches').val(recentSearches);
+        // var searchList = {
+        //     name: lastSearched
+        // };
 
-        recentSearches.push(searchList);
-        localStorage.setItem('searches', JSON.stringify(recentSearches));
-        console.log({ recentSearches, searchList });
+        // recentSearches.push(searchList);
+        // localStorage.setItem('searches', JSON.stringify(recentSearches));
+        // console.log(searchList);
+        // console.log(searchParam);
+    search(searchVal, searchParam);
+    
     })
-
+    
     // $('.previous-searches').on('click', "li", function (event) {
     //     event.preventDefault();
     //     var lastSearched = $(this).text()
@@ -122,6 +125,6 @@ $(document).ready(function () {
 
 
     };
-
+    search();
 
 });
