@@ -63,7 +63,7 @@ $(document).ready(function () {
         // recentSearches.push(searchList);
         // localStorage.setItem('searches', JSON.stringify(recentSearches));
         // console.log(searchList);
-        // console.log(searchParam);
+        console.log(searchParam);
     search(searchVal, searchParam);
     
     })
@@ -76,7 +76,7 @@ $(document).ready(function () {
     // });
 
     function search(searchVal, searchParam) {
-        $('.medium').html(' ');
+        $('.small').html(' ');
 
         var baseURL = 'https://api.data.charitynavigator.org/v2/Organizations?app_id=f23e3059&app_key=e0734aa01e43908655ef9c264f6dcf2e'
         var endingURL;
@@ -115,7 +115,7 @@ $(document).ready(function () {
                     orgWebsiteOne.attr("target", "_blank");
                     orgWebsiteOne.text(random.charityName);
                     orgWebsiteOne.addClass("link");
-                    $('.medium').append(orgWebsiteOne);
+                    $('.small').append(orgWebsiteOne);
                 }
             }
             returnResults()
