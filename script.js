@@ -8,9 +8,14 @@ $(document).ready(function () {
     });
     M.textareaAutoResize($('#textarea1'));
 
+    $(document).ready(function(){
+        $('.sidenav').sidenav();
+      });
+
     var date = moment().format('MMMM Do YYYY');
 
     $('#date').text(date);
+    
     //Build in Javascript that allows dropdown option to determine what text will go into text area
 
     var myTextBox = $('#textarea1');
@@ -25,6 +30,7 @@ $(document).ready(function () {
     //Build in Javascript for Charity Navigator API calls, based on name, state or category
     //Build in Javascript for API call to coincide with search parameters
     //Allow for local storage of previous 5 searches
+
     // function storeSearches() {
         // $('.search-history').empty()
         // var recentSearches = JSON.parse(localStorage.getItem('searches')) || []
@@ -52,17 +58,21 @@ $(document).ready(function () {
         event.preventDefault();
         var searchParam = myTextBox.val();
 
-        // var lastSearched = $('.search-history');
+         var lastSearched = $('li');
+         lastSearched.addClass("previous-searches");
+         lastSearched.text(myTextBox.val());
+         console.log(lastSearched);
+         $(".recent-searches").append(lastSearched);
 
         // var recentSearches = JSON.parse(localStorage.getItem('searches')) || [];
         // $('.previous-searches').val(recentSearches);
-        // var searchList = {
-        //     name: lastSearched
-        // };
+         var searchList = {
+             name: lastSearched
+         };
 
         // recentSearches.push(searchList);
-        // localStorage.setItem('searches', JSON.stringify(recentSearches));
-        // console.log(searchList);
+         //localStorage.setItem('searches', JSON.stringify(searchList));
+         //console.log(searchList);
         console.log(searchParam);
     search(searchVal, searchParam);
     
