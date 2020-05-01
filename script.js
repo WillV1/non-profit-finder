@@ -1,21 +1,22 @@
 $(document).ready(function () {
 
     var searchVal;
+    var searchParam;
 
     M.AutoInit();
-    $(document).ready(function () {
+    $(document).ready({ passive: true }, function () {
         $('select').formSelect();
     });
     M.textareaAutoResize($('#textarea1'));
 
-    $(document).ready(function(){
+    $(document).ready({ passive: true }, function () {
         $('.sidenav').sidenav();
-      });
+    });
 
     var date = moment().format('MMMM Do YYYY');
 
     $('#date').text(date);
-    
+
     //Build in Javascript that allows dropdown option to determine what text will go into text area
 
     var myTextBox = $('#textarea1');
@@ -31,59 +32,52 @@ $(document).ready(function () {
     //Build in Javascript for API call to coincide with search parameters
     //Allow for local storage of previous 5 searches
 
-    // function storeSearches() {
-        // $('.search-history').empty()
-        // var recentSearches = JSON.parse(localStorage.getItem('searches')) || []
-        //console.log(recentSearches);
-        // for (var i = 0; i < recentSearches.length; i++) {
-        //     while (recentSearches.length > 5) {
-        //         var lastFive = recentSearches.length - 5;
-        //         var index = 0;
-        //         recentSearches.splice(index, lastFive);
-        //         index++
-        //     }
-        //     var previousSearch = $('<li>')
-        //     previousSearch.addClass("list-group-item");
-        //     previousSearch.text(recentSearches[i].name)
-        //     $('.previous-searches').append(previousSearch);
+    function storeSearches() {
+    //$('.search-history').empty()
+    var recentSearches = JSON.parse(localStorage.getItem('searches')) || []
+    console.log(recentSearches);
+    for (var i = 0; i < recentSearches.length; i++) {
+        while (recentSearches.length > 5) {
+            var lastFive = recentSearches.length - 5;
+            var index = 0;
+            recentSearches.splice(index, lastFive);
+            index++
+        }
+        var lastSearched = $('<li>')
+        lastSearched.addClass("list-group-item");
+        lastSearched.text(searchParam)
+        $('#recent-searches').append(lastSearched);
 
 
-        // }
-    //     console.log(recentSearches);
-    // }
-    // storeSearches()
+    }
+        console.log(recentSearches);
+    }
+    storeSearches()
 
 
     $('#button').on('click', function (event) {
         event.preventDefault();
-        var searchParam = myTextBox.val();
+        searchParam = myTextBox.val();
 
-         var lastSearched = $('li');
-         lastSearched.addClass("previous-searches");
-         lastSearched.text(myTextBox.val());
-         console.log(lastSearched);
-         $(".recent-searches").append(lastSearched);
+        var searchedList = [];
+        var lastSearched = $("<li>")
+        lastSearched.text(searchParam);
+        searchedList.push(lastSearched[0].textContent);
+        console.log(searchedList);
+        $("#recent-searches").append(searchedList);
 
-        // var recentSearches = JSON.parse(localStorage.getItem('searches')) || [];
-        // $('.previous-searches').val(recentSearches);
-         var searchList = {
-             name: lastSearched
-         };
+         var recentSearches = JSON.parse(localStorage.getItem('searches')) || [];
+        // var searchList = {
+        //     name: lastSearched
+        // };
 
-        // recentSearches.push(searchList);
-         //localStorage.setItem('searches', JSON.stringify(searchList));
-         //console.log(searchList);
+        recentSearches.push(searchedList);
+        localStorage.setItem('searches', JSON.stringify(searchedList));
+        //console.log(searchList);
         console.log(searchParam);
-    search(searchVal, searchParam);
-    
-    })
-    
-    // $('.previous-searches').on('click', "li", function (event) {
-    //     event.preventDefault();
-    //     var lastSearched = $(this).text()
-    //     search(searchVal, searchParam);
+        search(searchVal, searchParam);
 
-    // });
+    })
 
     function search(searchVal, searchParam) {
         $('.small').html(' ');
