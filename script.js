@@ -2,6 +2,7 @@ $(document).ready(function () {
 
     var searchVal;
     var searchParam;
+    var searchedList = [];
 
     M.AutoInit();
     $(document).ready({ passive: true }, function () {
@@ -32,48 +33,48 @@ $(document).ready(function () {
     //Build in Javascript for API call to coincide with search parameters
     //Allow for local storage of previous 5 searches
 
-    function storeSearches() {
-    //$('.search-history').empty()
-    var recentSearches = JSON.parse(localStorage.getItem('searches')) || []
-    console.log(recentSearches);
-    for (var i = 0; i < recentSearches.length; i++) {
-        while (recentSearches.length > 5) {
-            var lastFive = recentSearches.length - 5;
-            var index = 0;
-            recentSearches.splice(index, lastFive);
-            index++
-        }
-        var lastSearched = $('<li>')
-        lastSearched.addClass("list-group-item");
-        lastSearched.text(searchParam)
-        $('#recent-searches').append(lastSearched);
+     function storeSearches() {
+    $('.recent-searches').empty()
+     var recentSearches = JSON.parse(localStorage.getItem('searches')) || []
+    // console.log(recentSearches);
+     for (var i = 0; i < recentSearches.length; i++) {
+         while (recentSearches.length > 5) {
+             var lastFive = recentSearches.length - 5;
+             var index = 0;
+             recentSearches.splice(index, lastFive);
+             index++
+         }
+         var lastItem = $('<li>')
+         var breakItem = $('<br>')
+         lastItem.addClass("list-group-item");
+         lastItem.text(recentSearches)
+         $('#recent-searches').append(lastItem);
+         lastItem.append(breakItem);
 
 
     }
-        console.log(recentSearches);
+         console.log(recentSearches);
     }
-    storeSearches()
+     storeSearches()
 
 
     $('#button').on('click', function (event) {
         event.preventDefault();
         searchParam = myTextBox.val();
 
-        var searchedList = [];
+        
         var lastSearched = $("<li>")
         lastSearched.text(searchParam);
-        searchedList.push(lastSearched[0].textContent);
-        console.log(searchedList);
+       searchedList.push(lastSearched[0].textContent);
         $("#recent-searches").append(searchedList);
+        console.log(searchedList)
 
-         var recentSearches = JSON.parse(localStorage.getItem('searches')) || [];
-        // var searchList = {
-        //     name: lastSearched
-        // };
-
-        recentSearches.push(searchedList);
-        localStorage.setItem('searches', JSON.stringify(searchedList));
-        //console.log(searchList);
+          var recentSearches = JSON.parse(localStorage.getItem('searches')) || [];
+        
+        // console.log(searchList)
+        
+         localStorage.setItem('searches', JSON.stringify(searchedList));
+        // //console.log(searchList);
         console.log(searchParam);
         search(searchVal, searchParam);
 
@@ -88,7 +89,7 @@ $(document).ready(function () {
         if (searchVal == 'state') {
             endingURL = '&search=' + searchParam;
         } else if (searchVal == 'zip') {
-            endingURL = '&zip=' + searchParam;
+            endingURL = '&zip=' + parseInt(searchParam);
         } else if (searchVal == 'keyword') {
             endingURL = '&category=' + searchParam;
         } else {
