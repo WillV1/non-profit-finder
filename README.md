@@ -1,19 +1,13 @@
 # charity-finder
 
-Weather-App is a third-party API powered weather forecast application that provides the user information about local real-time weather, humidity, wind speed and UV index and five-day weather forecasts. By a user selecting a city, the application accesses the OpenWeatherMap API, retrieves local weather data and stores the last five cities searched for later review.
+Non-Profit Finder is a third-party API powered not-for-profit financial data application that provides the user information about randomly chosen not-for-profits based on a user's search parameters. By a user selecting a state, zipcode, or keyword search, the application accesses the Charity Navigator API, retrieves background data about ten randomly chosen not-for-profits selected by the search and stores the last five cities searched for later review.
 
-I designed this application to demonstrate my JQuery proficiency, as well as mastery over the utilization of Bootstrap styling features, including the use of nested rows and columns and cards and demonstrate proficiency of third-party API usage, as this application required the use of three separate calls to the OpenWeatherMap API.
+I designed this application to experiment with different features of Materialize CSS and demonstrate proficiency of third-party API usage.
 
 Key Features:
 
-API call to OpenWeatherMap providing the current weather conditions in a given city, including:
+API call to Charity Navigation providing a randomly generated list of ten not-for-profits (based on JQuery coding)
 
-Current temparature Current humidity Current wind speed Current UV Index, indicating wether the city index is low, moderate, or high (Note: The UV Index information required a separate API call) Icon illustrating the current weather
+Local storage functionality allowing the user to enter and retrieve up to five most recent searches at any time for later reference.
 
-API call provides 5-day forecast using a separate API call showing the:
-
-Forecasted temparature Forecasted humidity, and Forecasted weather icon
-
-Local storage functionality allowing the user to enter and retrieve up to five cities at any time, to track the conditions in multiple locations for later reference.
-
-Please see deployed application at: 
+Please see deployed application at: https://willv1.github.io/charity-finder/index.html.
