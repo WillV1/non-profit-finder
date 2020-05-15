@@ -1,8 +1,11 @@
 $(document).ready(function () {
 
-    var searchVal;
-    var searchParam;
-    var searchedList = [];
+    let searchVal;
+    let searchParam;
+    let searchParamTwo;
+    let searchedList = [];
+
+    // Scripts for Materialize functionality
 
     M.AutoInit();
     $(document).ready({ passive: true }, function () {
@@ -10,18 +13,23 @@ $(document).ready(function () {
     });
     M.textareaAutoResize($('#textarea1'));
 
+    M.textareaAutoResize($('#textarea2'));
+
     $(document).ready({ passive: true }, function () {
         $('.sidenav').sidenav();
     });
 
-    var date = moment().format('MMMM Do YYYY');
+    //Moment.js script for current date
+
+    let date = moment().format('MMMM Do YYYY');
 
     $('#date').text(date);
 
-    //Build in Javascript that allows dropdown option to determine what text will go into text area
+    //Build in Javascript that allows dropdown option to determine what text will go into text areas
 
-    var myTextBox = $('#textarea1');
-    var myDropDown = $('#organization-search');
+    const myTextBox = $('#textarea1');
+    const myTextBoxTwo = $('#textarea2')
+    const myDropDown = $('#organization-search');
 
     myDropDown.on('change', function () {
         searchVal = ($(this).val());
@@ -29,62 +37,66 @@ $(document).ready(function () {
     })
 
 
-    //Build in Javascript for Charity Navigator API calls, based on name, state or category
-    //Build in Javascript for API call to coincide with search parameters
+
     //Allow for local storage of previous 5 searches
 
-     function storeSearches() {
-    $('.recent-searches').empty()
-     var recentSearches = JSON.parse(localStorage.getItem('searches')) || []
-    // console.log(recentSearches);
-     for (var i = 0; i < recentSearches.length; i++) {
-         while (recentSearches.length > 5) {
-             var lastFive = recentSearches.length - 5;
-             var index = 0;
-             recentSearches.splice(index, lastFive);
-             index++
-         }
-         var lastItem = $('<li>')
-         var breakItem = $('<br>')
-         lastItem.addClass("list-group-item");
-         lastItem.text(recentSearches)
-         $('#recent-searches').append(lastItem);
-         lastItem.append(breakItem);
+    function storeSearches() {
+        $('.recent-searches').empty()
+        let recentSearches = JSON.parse(localStorage.getItem('searches')) || []
+        // console.log(recentSearches);
+        for (var i = 0; i < recentSearches.length; i++) {
+            while (recentSearches.length > 5) {
+                var lastFive = recentSearches.length - 5;
+                var index = 0;
+                recentSearches.splice(index, lastFive);
+                index++
+            }
+            let lastItem = $('<li>')
+            let breakItem = $('<br>')
+            lastItem.addClass("list-group-item");
+            lastItem.text(recentSearches)
+            $('#recent-searches').append(lastItem);
+            lastItem.append(breakItem);
 
 
+        }
+        console.log(recentSearches);
     }
-         console.log(recentSearches);
-    }
-     storeSearches()
+    storeSearches()
 
+    //Build in Javascript for Charity Navigator API calls, based on state or zip and category
+    //Build in Javascript for API call to coincide with search parameters
 
     $('#button').on('click', function (event) {
         event.preventDefault();
         searchParam = myTextBox.val();
+        searchParamTwo = myTextBoxTwo.val();
 
-        
-        var lastSearched = $("<li>")
+
+        let lastSearched = $("<li>")
         lastSearched.text(searchParam);
-       searchedList.push(lastSearched[0].textContent);
+        searchedList.push(lastSearched[0].textContent);
         $("#recent-searches").append(searchedList);
         console.log(searchedList)
 
-          var recentSearches = JSON.parse(localStorage.getItem('searches')) || [];
-        
+        const recentSearches = JSON.parse(localStorage.getItem('searches')) || [];
+
         // console.log(searchList)
-        
-         localStorage.setItem('searches', JSON.stringify(searchedList));
+
+        localStorage.setItem('searches', JSON.stringify(searchedList));
         // //console.log(searchList);
         console.log(searchParam);
         search(searchVal, searchParam);
 
     })
 
+    //Callback functions to make two API calls (state or zip) and keyword
+
     function search(searchVal, searchParam) {
         $('.small').html(' ');
 
-        var baseURL = 'https://api.data.charitynavigator.org/v2/Organizations?app_id=f23e3059&app_key=e0734aa01e43908655ef9c264f6dcf2e'
-        var endingURL;
+        const baseURL = 'https://api.data.charitynavigator.org/v2/Organizations?app_id=f23e3059&app_key=e0734aa01e43908655ef9c264f6dcf2e'
+        const endingURL;
 
         if (searchVal == 'state') {
             endingURL = '&search=' + searchParam;
@@ -102,19 +114,19 @@ $(document).ready(function () {
         }).then(function (response) {
             console.log(response);
 
-            //Build in Javascript for card to display charity information based on API call
+            //Build in Javascript for card to display charity information based on API calls
 
             function returnResults() {
 
-                var orgArray = [];
+                let orgArray = [];
                 orgArray.push(response);
                 console.log(orgArray);
 
                 for (var i = 0; i < 10; i++) {
 
-                    var random = orgArray[0][(Math.floor(Math.random() * orgArray[0].length))];
+                    let random = orgArray[0][(Math.floor(Math.random() * orgArray[0].length))];
                     console.log(random);
-                    var orgWebsiteOne = $("<a>");
+                    let orgWebsiteOne = $("<a>");
                     orgWebsiteOne.attr("id", "website");
                     orgWebsiteOne.attr("href", random.charityNavigatorURL);
                     orgWebsiteOne.attr("target", "_blank");

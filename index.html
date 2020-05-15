@@ -23,20 +23,30 @@
                 <h5>Search for Non-Profit by:</h5>
             </div>
         </div>
+        <!--Location Option Dropdown-->
         <div class="input-field col s4">
             <select id="organization-search">
                 <option value="" disabled selected>Choose your option</option>
                 <option value="state">Organization State (two letter abbreviation)</option>
                 <option value="zip">Organization Zip Code</option>
-                <option value="keyword">Organization Keyword</option>
             </select>
         </div>
+
+          <!--Search Text Areas-->
         <div class="row">
             <form class="col s8">
                 <div class="row">
                     <div class="input-field col s8">
                         <textarea id="textarea1" class="materialize-textarea white-text"></textarea>
-                        <label for="textarea1">Enter Search Terms Here</label>
+                        <label for="textarea1">Enter Location Search Here</label>
+                    </div>
+                </div>
+            </form>
+            <form class="col s8">
+                <div class="row">
+                    <div class="input-field col s8">
+                        <textarea id="textarea2" class="materialize-textarea white-text"></textarea>
+                        <label for="textarea2">Enter Keyword Term Here</label>
                     </div>
                 </div>
             </form>
@@ -46,6 +56,8 @@
                 <i class="material-icons right"></i>
             </button>
         </div>
+
+        <!-- Sidenav for Recent Searches-->
         <ul id="slide-out" class="sidenav">
             <li class="collection-header center-align">
                 <h5>Recent Searches</h5>
@@ -59,6 +71,7 @@
             Searches</button>
 
         <div class="card small">
+
             <!-- Card Content -->
         </div>
         <footer class="page-footer">
