@@ -86,62 +86,112 @@ $(document).ready(function () {
         localStorage.setItem('searches', JSON.stringify(searchedList));
         // //console.log(searchList);
         console.log(searchParam);
-        search(searchVal, searchParam);
+        search(searchVal, searchParam, searchParamTwo);
 
     })
 
     //Callback functions to make two API calls (state or zip) and keyword
 
-    function search(searchVal, searchParam) {
+    function search(searchVal, searchParam, searchParamTwo) {
         $('.small').html(' ');
 
-        const baseURL = 'https://api.data.charitynavigator.org/v2/Organizations?app_id=f23e3059&app_key=e0734aa01e43908655ef9c264f6dcf2e'
+        const baseURLOne = 'https://api.data.charitynavigator.org/v2/Organizations?app_id=f23e3059&app_key=e0734aa01e43908655ef9c264f6dcf2e&search' + searchParamTwo;
         const endingURL;
 
         if (searchVal == 'state') {
-            endingURL = '&search=' + searchParam;
+            endingURL = '&state=' + searchParam;
         } else if (searchVal == 'zip') {
             endingURL = '&zip=' + parseInt(searchParam);
-        } else if (searchVal == 'keyword') {
-            endingURL = '&category=' + searchParam;
         } else {
             return
         }
 
-        $.ajax({
-            url: baseURL + endingURL,
-            method: "GET"
-        }).then(function (response) {
-            console.log(response);
+        $.when(
+            $.ajax({
+                url: baseURLOne + endingURL,
+                method: "GET"
+            }).then(function (response) {
+                console.log(response);
 
-            //Build in Javascript for card to display charity information based on API calls
+                //Build in Javascript for card to display charity information based on API calls
 
-            function returnResults() {
+                function returnResults() {
 
-                let orgArray = [];
-                orgArray.push(response);
-                console.log(orgArray);
+                    let orgArray = [];
+                    orgArray.push(response);
+                    console.log(orgArray);
 
-                for (var i = 0; i < 10; i++) {
+                    for (var i = 0; i < 10; i++) {
 
-                    let random = orgArray[0][(Math.floor(Math.random() * orgArray[0].length))];
-                    console.log(random);
-                    let orgWebsiteOne = $("<a>");
-                    orgWebsiteOne.attr("id", "website");
-                    orgWebsiteOne.attr("href", random.charityNavigatorURL);
-                    orgWebsiteOne.attr("target", "_blank");
-                    orgWebsiteOne.text(random.charityName);
-                    orgWebsiteOne.addClass("link");
-                    $('.small').append(orgWebsiteOne);
+                        let random = orgArray[0][(Math.floor(Math.random() * orgArray[0].length))];
+                        console.log(random);
+                        let orgWebsiteOne = $("<a>");
+                        orgWebsiteOne.attr("id", "website");
+                        orgWebsiteOne.attr("href", random.charityNavigatorURL);
+                        orgWebsiteOne.attr("target", "_blank");
+                        orgWebsiteOne.text(random.charityName);
+                        orgWebsiteOne.addClass("link");
+                        $('.small').append(orgWebsiteOne);
+                    }
                 }
-            }
-            returnResults()
-        });
+                returnResults()
+
+// Second callback to make news API call
+
+                const settings = {
+                    "async": true,
+                    "crossDomain": true,
+                    "url": "https://contextualwebsearch-websearch-v1.p.rapidapi.com/api/Search/NewsSearchAPI?autoCorrect=false&pageNumber=1&pageSize=10&q=education&safeSearch=true",
+                    "method": "GET",
+                    "headers": {
+                        "x-rapidapi-host": "contextualwebsearch-websearch-v1.p.rapidapi.com",
+                        "x-rapidapi-key": "d9822625a2msh4f7608dcb4681cbp1d805fjsn2e6e7ce7ee4b"
+                    }
+                }
+
+                $.ajax(settings).done(function (responseTwo) {
+                    console.log(responseTwo);
+                })
+
+                    .then(function (responseTwo) {
+                        console.log(responseTwo);
+
+                        function returnNewsResults() {
+
+// Code to push news API call results to second card
+
+                            let newsArray = [];
+                            newsArray.push(responseTwo);
+                            console.log(newsArray);
+        
+                            // for (var i = 0; i < 10; i++) {
+        
+                            //     let random = orgArray[0][(Math.floor(Math.random() * orgArray[0].length))];
+                            //     console.log(random);
+                            //     let orgWebsiteOne = $("<a>");
+                            //     orgWebsiteOne.attr("id", "website");
+                            //     orgWebsiteOne.attr("href", random.charityNavigatorURL);
+                            //     orgWebsiteOne.attr("target", "_blank");
+                            //     orgWebsiteOne.text(random.charityName);
+                            //     orgWebsiteOne.addClass("link");
+                            //     $('.small').append(orgWebsiteOne);
+                            // }
+                        }
+                        returnNewsResults()
+
+                    })
+
+
+            })
+
+        )
 
 
 
 
-    };
-    search();
+
+
+};
+search();
 
 });
