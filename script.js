@@ -96,7 +96,7 @@ $(document).ready(function () {
         $('.small').html(' ');
 
         const baseURLOne = 'https://api.data.charitynavigator.org/v2/Organizations?app_id=f23e3059&app_key=e0734aa01e43908655ef9c264f6dcf2e&search' + searchParamTwo;
-        const endingURL;
+        let endingURL;
 
         if (searchVal == 'state') {
             endingURL = '&state=' + searchParam;
@@ -141,7 +141,7 @@ $(document).ready(function () {
                 const settings = {
                     "async": true,
                     "crossDomain": true,
-                    "url": "https://contextualwebsearch-websearch-v1.p.rapidapi.com/api/Search/NewsSearchAPI?autoCorrect=false&pageNumber=1&pageSize=10&q=education&safeSearch=true",
+                    "url": "https://contextualwebsearch-websearch-v1.p.rapidapi.com/api/Search/NewsSearchAPI?autoCorrect=false&pageNumber=1&pageSize=10&q=" + random.charityName + "&safeSearch=true",
                     "method": "GET",
                     "headers": {
                         "x-rapidapi-host": "contextualwebsearch-websearch-v1.p.rapidapi.com",
@@ -159,6 +159,7 @@ $(document).ready(function () {
                         function returnNewsResults() {
 
 // Code to push news API call results to second card
+                $('.small-two').html(' '); 
 
                             let newsArray = [];
                             newsArray.push(responseTwo);
