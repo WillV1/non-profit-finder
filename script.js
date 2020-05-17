@@ -93,7 +93,7 @@ $(document).ready(function () {
     //Callback functions to make two API calls (state or zip) and keyword
 
     function search(searchVal, searchParam, searchParamTwo) {
-        $('.small').html(' ');
+        $('.number-one').html(' ');
 
         const baseURLOne = 'https://api.data.charitynavigator.org/v2/Organizations?app_id=f23e3059&app_key=e0734aa01e43908655ef9c264f6dcf2e&search' + searchParamTwo;
         let endingURL;
@@ -159,7 +159,7 @@ $(document).ready(function () {
                         function returnNewsResults() {
 
 // Code to push news API call results to second card
-                $('.small-two').html(' '); 
+                $('.number-two').html(' '); 
 
                             let newsArray = [];
                             newsArray.push(responseTwo);
