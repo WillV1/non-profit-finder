@@ -96,7 +96,8 @@ $(document).ready(function () {
     function search(searchVal, searchParam, searchParamTwo) {
         $('.number-one').html(' ');
 
-        const baseURLOne = 'https://api.data.charitynavigator.org/v2/Organizations?app_id=f23e3059&app_key=e0734aa01e43908655ef9c264f6dcf2e&search' + searchParamTwo;
+        // const baseURLOne = 'http://data.orghunter.com/v1/charitysearch?user_key=5915b09954386f0e8adbaaac80896bf1&searchTerm=' + searchParamTwo;
+        const baseURLOne = 'https://api.data.charitynavigator.org/v2/Organizations?app_id=f23e3059&app_key=e0734aa01e43908655ef9c264f6dcf2e&search=' + searchParamTwo;
         let endingURL;
 
         if (searchVal == 'state') {
@@ -149,7 +150,6 @@ $(document).ready(function () {
                         }
 
                         $.ajax(settings).done(function (responseTwo) {
-                            console.log(responseTwo);
                         })
 
                             .then(function (responseTwo) {
@@ -172,7 +172,8 @@ $(document).ready(function () {
                                     orgWebsiteTwo.attr("target", "_blank");
                                     orgWebsiteTwo.text(responseTwo.value[0].title);
                                     orgWebsiteTwo.addClass("link");
-                                    $('.number-two').append(orgWebsiteTwo);
+                                    console.log(orgWebsiteTwo);
+                                    $('.number-one').append(orgWebsiteTwo);
                                 }
                                 }
                                 returnNewsResults()
