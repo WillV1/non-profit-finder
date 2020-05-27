@@ -87,6 +87,7 @@ $(document).ready(function () {
         // //console.log(searchList);
         console.log(searchParam);
         search(searchVal, searchParam, searchParamTwo);
+        console.log(searchParamTwo);
 
     })
 
@@ -131,68 +132,59 @@ $(document).ready(function () {
                         orgWebsiteOne.attr("target", "_blank");
                         orgWebsiteOne.text(random.charityName);
                         orgWebsiteOne.addClass("link");
-                        $('.small').append(orgWebsiteOne);
+                        $('.number-one').append(orgWebsiteOne);
+
+
+                        // Second callback to make news API call
+
+                        const settings = {
+                            "async": true,
+                            "crossDomain": true,
+                            "url": "https://contextualwebsearch-websearch-v1.p.rapidapi.com/api/Search/NewsSearchAPI?autoCorrect=false&pageNumber=1&pageSize=10&q=" + random.charityName + "&safeSearch=true",
+                            "method": "GET",
+                            "headers": {
+                                "x-rapidapi-host": "contextualwebsearch-websearch-v1.p.rapidapi.com",
+                                "x-rapidapi-key": "d9822625a2msh4f7608dcb4681cbp1d805fjsn2e6e7ce7ee4b"
+                            }
+                        }
+
+                        $.ajax(settings).done(function (responseTwo) {
+                            console.log(responseTwo);
+                        })
+
+                            .then(function (responseTwo) {
+                                console.log(responseTwo);
+
+                                // Code to push news API call results to second card
+                                function returnNewsResults() {
+
+                                $('.number-two').html(' ');
+
+                                let newsArray = [];
+                                newsArray.push(responseTwo);
+                                console.log(newsArray);
+
+                                for (var i = 0; i < newsArray; i++) {
+
+                                    let orgWebsiteTwo = $("<a>");
+                                    orgWebsiteTwo.attr("id", "news-website");
+                                    orgWebsiteTwo.attr("href", responseTwo.value[0].url);
+                                    orgWebsiteTwo.attr("target", "_blank");
+                                    orgWebsiteTwo.text(responseTwo.value[0].title);
+                                    orgWebsiteTwo.addClass("link");
+                                    $('.number-two').append(orgWebsiteTwo);
+                                }
+                                }
+                                returnNewsResults()
+
+                            })
                     }
                 }
                 returnResults()
-
-// Second callback to make news API call
-
-                const settings = {
-                    "async": true,
-                    "crossDomain": true,
-                    "url": "https://contextualwebsearch-websearch-v1.p.rapidapi.com/api/Search/NewsSearchAPI?autoCorrect=false&pageNumber=1&pageSize=10&q=" + random.charityName + "&safeSearch=true",
-                    "method": "GET",
-                    "headers": {
-                        "x-rapidapi-host": "contextualwebsearch-websearch-v1.p.rapidapi.com",
-                        "x-rapidapi-key": "d9822625a2msh4f7608dcb4681cbp1d805fjsn2e6e7ce7ee4b"
-                    }
-                }
-
-                $.ajax(settings).done(function (responseTwo) {
-                    console.log(responseTwo);
-                })
-
-                    .then(function (responseTwo) {
-                        console.log(responseTwo);
-
-                        function returnNewsResults() {
-
-// Code to push news API call results to second card
-                $('.number-two').html(' '); 
-
-                            let newsArray = [];
-                            newsArray.push(responseTwo);
-                            console.log(newsArray);
-        
-                            // for (var i = 0; i < 10; i++) {
-        
-                            //     let random = orgArray[0][(Math.floor(Math.random() * orgArray[0].length))];
-                            //     console.log(random);
-                            //     let orgWebsiteOne = $("<a>");
-                            //     orgWebsiteOne.attr("id", "website");
-                            //     orgWebsiteOne.attr("href", random.charityNavigatorURL);
-                            //     orgWebsiteOne.attr("target", "_blank");
-                            //     orgWebsiteOne.text(random.charityName);
-                            //     orgWebsiteOne.addClass("link");
-                            //     $('.small').append(orgWebsiteOne);
-                            // }
-                        }
-                        returnNewsResults()
-
-                    })
-
-
             })
 
         )
-
-
-
-
-
-
-};
-search();
+    };
+    search();
 
 });
