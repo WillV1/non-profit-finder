@@ -4,7 +4,7 @@ const newsapi = new NewsAPI('a67400228579488db4aefbbbd0716576');
 
 module.exports = app => {
     app.get("/", function (req, res) {
-        res.sendFile(path.join(__dirname, "../views/index.html"));
+        res.sendFile(path.join(__dirname, "../public/index.html"));
     });
 
     // newsapi.v2.everything({
