@@ -1,0 +1,29 @@
+{
+  "name": "charity-finder",
+  "version": "1.0.0",
+  "description": "A website providing news and information about not for profit organizations",
+  "main": "server.js",
+  "scripts": {
+    "test": "npm test",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/WillV1/charity-finder.git"
+  },
+  "keywords": [
+    "not-for-profit"
+  ],
+  "author": "William VanHook",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/WillV1/charity-finder/issues"
+  },
+  "homepage": "https://github.com/WillV1/charity-finder#readme",
+  "dependencies": {
+    "consign": "^0.1.6",
+    "express": "^4.17.1",
+    "newsapi": "^2.4.0",
+    "nodemon": "^2.0.4"
+  }
+}
