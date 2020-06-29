@@ -93,92 +93,91 @@ $(document).ready(function () {
 
     //Callback functions to make two API calls (state or zip) and keyword
 
-    function search(searchVal, searchParam, searchParamTwo) {
+    const search = async (searchVal, searchParam, searchParamTwo) => {
         $('.number-one').html(' ');
 
         const baseURLOne = 'https://api.data.charitynavigator.org/v2/Organizations?app_id=f23e3059&app_key=e0734aa01e43908655ef9c264f6dcf2e&search=' + searchParamTwo;
         let endingURL;
 
         if (searchVal == 'state') {
-            endingURL = '&state=' + searchParam;
+            endingURL = '&state=' + searchParam + '&sizeRange=2';
         } else if (searchVal == 'zip') {
-            endingURL = '&zip=' + parseInt(searchParam);
+            endingURL = '&zip=' + parseInt(searchParam) + '&sizeRange=2';
         } else {
             return
         }
 
-        $.when(
-            $.ajax({
-                url: baseURLOne + endingURL,
-                method: "GET"
-            }).then(function (response) {
-                console.log(response);
+        const responseOne = await $.ajax({
+            url: baseURLOne + endingURL,
+            method: "GET"
+        })
 
-                //Build in Javascript for card to display charity information based on API calls
+        console.log(responseOne);
 
-                function returnResults() {
+        let orgArray = [];
+        orgArray.push(responseOne);
+        console.log(orgArray);
 
-                    let orgArray = [];
-                    orgArray.push(response);
-                    console.log(orgArray);
+        for (var i = 0; i < orgArray[0].length; i++) {
 
-                    for (var i = 0; i < orgArray[0].length; i++) {
+            let random = orgArray[0][(Math.floor(Math.random() * orgArray[0].length))];
+            console.log(random);
+            let orgWebsiteOne = $("<a>");
+            orgWebsiteOne.attr("id", "website");
+            orgWebsiteOne.attr("href", random.charityNavigatorURL);
+            orgWebsiteOne.attr("target", "_blank");
+            orgWebsiteOne.text(random.charityName);
+            orgWebsiteOne.addClass("link");
+            $('.number-one').append(orgWebsiteOne);
 
-                        let random = orgArray[0][(Math.floor(Math.random() * orgArray[0].length))];
-                        console.log(random);
-                        let orgWebsiteOne = $("<a>");
-                        orgWebsiteOne.attr("id", "website");
-                        orgWebsiteOne.attr("href", random.charityNavigatorURL);
-                        orgWebsiteOne.attr("target", "_blank");
-                        orgWebsiteOne.text(random.charityName);
-                        orgWebsiteOne.addClass("link");
-                        $('.number-one').append(orgWebsiteOne);
+        }
 
+    }
+    // Second callback to make news API call
+    const returnResults = async (responseOne) => {
 
-
-
-                        // Second callback to make news API call
-                        let queryURL = 'https://newsapi.org/v2/everything?q=' + random.charityName + '&apiKey=a67400228579488db4aefbbbd0716576' 
-
-                        $.ajax({
-                            url: queryURL,
-                            method: "GET"
-                        })
-
-                            .then(function (responseTwo) {
-                                console.log(responseTwo);
-
-                                // Code to push news API call results to second card
-                                function returnNewsResults() {
-
-                                $('.number-two').html(' ');
-
-                                let newsArray = [];
-                                newsArray.push(responseTwo);
-                                console.log(newsArray.length);
-
-                                for (var i = 0; i < newsArray.length; i++) {
-
-                                    let orgWebsiteTwo = $("<a>");
-                                    orgWebsiteTwo.attr("id", "news-website");
-                                    orgWebsiteTwo.attr("href", responseTwo.value[0].url);
-                                    orgWebsiteTwo.attr("target", "_blank");
-                                    orgWebsiteTwo.text(responseTwo.value[0].title);
-                                    orgWebsiteTwo.addClass("link");
-                                    console.log(orgWebsiteTwo);
-                                    $('.number-two').append(orgWebsiteTwo);
-                                }
-                                }
-                                returnNewsResults()
-
-                            })
-                    }
-                }
-                returnResults()
+        try {
+            const data = await fetch('/newsapi', {
+                method: 'post',
+                headers: {
+                    "Content-type": "application/json; charset=UTF-8"
+                },
+                // body: JSON.stringify(responseOne)
             })
 
-        )
-    };
-    search();
+            console.log(data)
+        } catch (err) {
+            console.log(err)
+        }
+
+        //Build in Javascript for card to display charity information based on API calls
+
+
+        // Code to push news API call results to second card
+        // function returnNewsResults(data) {
+
+        //     $('.number-two').html(' ');
+
+        //     let newsArray = [];
+        //     newsArray.push(data);
+        //     console.log(newsArray.length);
+
+        //     for (var i = 0; i < newsArray.length; i++) {
+
+        //         let orgWebsiteTwo = $("<a>");
+        //         orgWebsiteTwo.attr("id", "news-website");
+        //         orgWebsiteTwo.attr("href", data.value[0].url);
+        //         orgWebsiteTwo.attr("target", "_blank");
+        //         orgWebsiteTwo.text(data.value[0].title);
+        //         orgWebsiteTwo.addClass("link");
+        //         console.log(orgWebsiteTwo);
+        //         $('.number-two').append(orgWebsiteTwo);
+        //     }
+        // }
+        // returnNewsResults()
+
+    }
+    returnResults()
+    
 
 });
