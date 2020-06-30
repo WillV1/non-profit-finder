@@ -4,12 +4,12 @@ const express = require("express");
 const router = express.Router();
 // const readlineSync = require('readline-sync');
 
-router.post("/newsapi", async (req, res) => {
+router.get("/newsapi", async (req, res) => {
 
     const result = await newsapi.v2.everything({
-          q: "covid-19",
-          sources: 'cnn',
-          domains: 'cnn.com',
+          q: "",
+          sources: '',
+          domains: '',
           from: '2020-06-01',
           to: '2020-16-15',
           language: 'en',

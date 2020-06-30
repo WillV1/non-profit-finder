@@ -137,12 +137,12 @@ $(document).ready(function () {
     const returnResults = async (responseOne) => {
 
         try {
-            const data = await fetch('/newsapi', {
+            const data = await fetch('http://localhost:8080/newsapi', {
                 method: 'post',
                 headers: {
                     "Content-type": "application/json; charset=UTF-8"
                 },
-                // body: JSON.stringify(responseOne)
+                body: JSON.stringify(responseOne)
             })
 
             console.log(data)
