@@ -4,10 +4,10 @@ const express = require("express");
 const router = express.Router();
 // const readlineSync = require('readline-sync');
 
-router.get("/newsapi", async (req, res) => {
+router.post("/newsapi", function (req, res) {
 
-    const result = await newsapi.v2.everything({
-          q: "",
+    const result = newsapi.v2.everything({
+          q: req.body,
           sources: '',
           domains: '',
           from: '2020-06-01',
