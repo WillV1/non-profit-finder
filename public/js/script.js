@@ -142,12 +142,12 @@ $(document).ready(function () {
                 method: 'post',
 
                 headers: {
-                    "Content-type": "text/html; charset=UTF-8"
+                    "Content-type": "application/json; charset=UTF-8"
                 },
-                body: name
+                body: JSON.stringify({ name })
             })
 
-            console.log(response)
+            console.log(response.json)
         } catch (err) {
             console.log(err)
         }

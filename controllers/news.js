@@ -5,10 +5,10 @@ const router = express.Router();
 // const readlineSync = require('readline-sync');
 
 router.post("/newsapi", async (req, res) => {
-    console.log("---", req.body)
+    console.log("---", req)
     try {
     const result = await newsapi.v2.everything({
-          q: req.body,
+          q: req.body.name,
           sources: '',
           domains: 'news.google.com',
           from: '2020-06-01',
