@@ -131,18 +131,19 @@ $(document).ready(function () {
             $('.number-one').append(orgWebsiteOne);
             returnResults(random)
         }
-        
+
     }
     // Second callback to make news API call
     const returnResults = async (random) => {
 
         try {
-            const data = await fetch('http://localhost:8080/newsapi?q'+ random, {
+            const data = await fetch('http://localhost:8080/newsapi', {
                 method: 'post',
+
                 headers: {
                     "Content-type": "application/json; charset=UTF-8"
                 },
-                // body: JSON.stringify(data)
+                data: JSON.stringify(random)
             })
 
             console.log(data)
@@ -150,8 +151,19 @@ $(document).ready(function () {
             console.log(err)
         }
 
-        //Build in Javascript for card to display charity information based on API calls
+        // try {
+        // const data = await fetch('http://localhost8080/newsapi?q '+ random.charityName)
+        //     .then(response => response.json())
+        //     .then(data => console.log(data));}
+        //     catch (err) {
+        //         console.log(err)
+        //     }
 
+
+
+
+
+        //Build in Javascript for card to display charity information based on API calls
 
         // Code to push news API call results to second card
         // function returnNewsResults(data) {
@@ -177,7 +189,7 @@ $(document).ready(function () {
         // returnNewsResults()
 
     }
-    
-    
+
+
 
 });

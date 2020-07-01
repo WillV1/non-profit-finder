@@ -4,21 +4,25 @@ const express = require("express");
 const router = express.Router();
 // const readlineSync = require('readline-sync');
 
-router.post("/newsapi", function (req, res) {
-
-    const result = newsapi.v2.everything({
+router.get("/newsapi", async (req, res) => {
+    console.log("---", req.body)
+    try {
+    const result = await newsapi.v2.everything({
           q: req.body,
           sources: '',
-          domains: '',
+          domains: 'news.google.com',
           from: '2020-06-01',
-          to: '2020-16-15',
+          to: '2020-06-30',
           language: 'en',
           sortBy: 'relevancy',
           page: 1
         })
     console.log(result);
-    res.json(result);
-
+    res.json(result);}
+    catch (err) {
+        
+        console.log(err);
+      }
 })
 
 module.exports = router; 
