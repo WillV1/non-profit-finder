@@ -4,7 +4,7 @@ const express = require("express");
 const router = express.Router();
 // const readlineSync = require('readline-sync');
 
-router.get("/newsapi", async (req, res) => {
+router.post("/newsapi", async (req, res) => {
     console.log("---", req.body)
     try {
     const result = await newsapi.v2.everything({
@@ -17,6 +17,7 @@ router.get("/newsapi", async (req, res) => {
           sortBy: 'relevancy',
           page: 1
         })
+    console.log("Search Results")
     console.log(result);
     res.json(result);}
     catch (err) {

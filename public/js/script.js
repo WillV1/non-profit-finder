@@ -129,24 +129,25 @@ $(document).ready(function () {
             orgWebsiteOne.text(random.charityName);
             orgWebsiteOne.addClass("link");
             $('.number-one').append(orgWebsiteOne);
-            returnResults(random)
+            returnResults(random.charityName)
         }
 
     }
     // Second callback to make news API call
-    const returnResults = async (random) => {
-
+    const returnResults = async (name) => {
+        console.log("searchTerm");
+        console.log(name);
         try {
-            const data = await fetch('http://localhost:8080/newsapi', {
+            const response = await fetch('http://localhost:8080/newsapi', {
                 method: 'post',
 
                 headers: {
-                    "Content-type": "application/json; charset=UTF-8"
+                    "Content-type": "text/html; charset=UTF-8"
                 },
-                data: JSON.stringify(random)
+                body: name
             })
 
-            console.log(data)
+            console.log(response)
         } catch (err) {
             console.log(err)
         }
