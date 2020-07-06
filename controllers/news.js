@@ -10,9 +10,9 @@ router.post("/newsapi", async (req, res) => {
     const result = await newsapi.v2.everything({
           q: req.body.name,
           sources: '',
-          domains: 'news.google.com',
-          from: '2020-06-01',
-          to: '2020-06-30',
+          domains: 'https://www.newsobserver.com/',
+          from: '2020-06-15',
+          to: '2020-07-02',
           language: 'en',
           sortBy: 'relevancy',
           page: 1

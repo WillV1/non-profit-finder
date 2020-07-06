@@ -2,6 +2,7 @@ const express = require('express');
 const path = require('path');
 const cors = require("cors");
 const bodyParser = require('body-parser');
+var router = require('./controllers/webSearch')
 
 
 const PORT = process.env.PORT || 8080;
@@ -11,9 +12,8 @@ app.use(bodyParser.json());
 app.use(express.static(__dirname + '/public'));
 app.use(cors());
 
+app.use('/', router)
 
-const newsController = require("./controllers/news");
-app.use(newsController);
 
 
 app.listen(PORT, () => {

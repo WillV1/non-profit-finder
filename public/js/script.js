@@ -133,33 +133,44 @@ $(document).ready(function () {
         }
 
     }
+
+    const returnResults = name => {
     // Second callback to make news API call
-    const returnResults = async (name) => {
-        console.log("searchTerm");
+          console.log("searchTerm");
         console.log(name);
-        try {
-            const response = await fetch('http://localhost:8080/newsapi', {
-                method: 'post',
-
-                headers: {
-                    "Content-type": "application/json; charset=UTF-8"
-                },
-                body: JSON.stringify({ name })
-            })
-
-            console.log(response.json)
-        } catch (err) {
-            console.log(err)
+    
+    const response = axios({
+        method: 'post',
+        url: '/',
+        data: {
+          name: name,
         }
+      })
 
-        // try {
-        // const data = await fetch('http://localhost8080/newsapi?q '+ random.charityName)
-        //     .then(response => response.json())
-        //     .then(data => console.log(data));}
-        //     catch (err) {
-        //         console.log(err)
-        //     }
+      .then((response) => {
+        console.log(response);
+      }, (error) => {
+        console.log(error);
+      });
 
+
+    // const returnResults = async (name) => {
+    //     console.log("searchTerm");
+    //     console.log(name);
+    //     try {
+    //         const response = await fetch('http://localhost:8080', {
+    //             method: 'POST',
+
+    //             headers: {
+    //                 "Content-type": "application/json; charset=UTF-8"
+    //             },
+    //             body: JSON.stringify({ name }),
+    //         })
+
+    //         console.log(await response.json())
+    //     } catch (err) {
+    //         console.log(err)
+    //     }
 
 
 
@@ -189,8 +200,8 @@ $(document).ready(function () {
         // }
         // returnNewsResults()
 
+    
     }
-
 
 
 });
