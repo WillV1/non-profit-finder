@@ -3,18 +3,18 @@ const path = require('path');
 const axios = require("axios");
 const cors = require("cors");
 const bodyParser = require('body-parser');
-var router = require('./controllers/webSearch')
+//var routr = require('./controllers/webSearch')
 
 
 const PORT = process.env.PORT || 8080;
 const app = express();
 
-app.use(bodyParser.json());
+//app.use(bodyParser.json());
 app.use(express.static(__dirname + '/public'));
 app.use(cors());
 
 app.get('/', function (req, res) {
-
+  console.log("got into search function");
   axios({
       "method":"GET",
       "url":"https://contextualwebsearch-websearch-v1.p.rapidapi.com/api/Search/WebSearchAPI",
@@ -27,11 +27,12 @@ app.get('/', function (req, res) {
       "autoCorrect":"true",
       "pageNumber":"1",
       "pageSize":"10",
-      "q":req.body.name,
+      "q":req.query.name,
       "safeSearch":"false"
       }
       })
       .then((response)=>{
+        console.log(response);
         res.json(response)
       })
       .catch((error)=>{

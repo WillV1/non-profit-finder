@@ -158,15 +158,15 @@ $(document).ready(function () {
         console.log("searchTerm");
         console.log(name);
         try {
-            const response = await fetch('/', {
-                method: 'POST',
+            const response = await fetch('/?name=' + name, {
+                method: 'GET',
                 mode: 'cors',
                 headers: {
-                    "Content-type": "application/json; charset=UTF-8"
-                },
-                body: JSON.stringify({ name }),
+                    "Content-type": "text/html; charset=UTF-8"
+                }
             })
-
+            console.log("response Search");
+            console.log(response)
             console.log(response.json())
         } catch (err) {
             console.log(err)
