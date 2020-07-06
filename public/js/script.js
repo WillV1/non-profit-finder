@@ -134,31 +134,12 @@ $(document).ready(function () {
 
     }
 
-//     const returnResults = name => {
-//     // Second callback to make news API call
-//           console.log("searchTerm");
-//         console.log(name);
-    
-//    axios({
-//         method: 'post',
-//         url: 'https://contextualwebsearch-websearch-v1.p.rapidapi.com/api/Search/WebSearchAPI',
-//         data: {
-//          reponse: name
-//         }
-//       })
-
-//       .then((response) => {
-//         console.log(response);
-//       }, (error) => {
-//         console.log(error);
-//       });
-
-
     const returnResults = async (name) => {
+        $('.number-two').html(' ');
         console.log("searchTerm");
         console.log(name);
         try {
-            const response = await fetch('/?name=' + name, {
+            const response = await fetch('/search?name=' + name, {
                 method: 'GET',
                 mode: 'cors',
                 headers: {
@@ -167,38 +148,36 @@ $(document).ready(function () {
             })
             console.log("response Search");
             console.log(response)
-            console.log(response.json())
+            console.log(await response.json())
         } catch (err) {
             console.log(err)
         }
 
 
-
-
         //Build in Javascript for card to display charity information based on API calls
 
         // Code to push news API call results to second card
-        // function returnNewsResults(data) {
+        function returnNewsResults(data) {
 
-        //     $('.number-two').html(' ');
+        
 
-        //     let newsArray = [];
-        //     newsArray.push(data);
-        //     console.log(newsArray.length);
+            let newsArray = [];
+            newsArray.push(response);
+            console.log(newsArray.length);
 
-        //     for (var i = 0; i < newsArray.length; i++) {
+            for (var i = 0; i < newsArray.length; i++) {
 
-        //         let orgWebsiteTwo = $("<a>");
-        //         orgWebsiteTwo.attr("id", "news-website");
-        //         orgWebsiteTwo.attr("href", data.value[0].url);
-        //         orgWebsiteTwo.attr("target", "_blank");
-        //         orgWebsiteTwo.text(data.value[0].title);
-        //         orgWebsiteTwo.addClass("link");
-        //         console.log(orgWebsiteTwo);
-        //         $('.number-two').append(orgWebsiteTwo);
-        //     }
-        // }
-        // returnNewsResults()
+                let orgWebsiteTwo = $("<a>");
+                orgWebsiteTwo.attr("id", "news-website");
+                orgWebsiteTwo.attr("href", data.value[0].url);
+                orgWebsiteTwo.attr("target", "_blank");
+                orgWebsiteTwo.text(data.value[0].title);
+                orgWebsiteTwo.addClass("link");
+                console.log(orgWebsiteTwo);
+                $('.number-two').append(orgWebsiteTwo);
+            }
+        }
+        returnNewsResults()
 
     
     }

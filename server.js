@@ -13,7 +13,7 @@ const app = express();
 app.use(express.static(__dirname + '/public'));
 app.use(cors());
 
-app.get('/', function (req, res) {
+app.get('/search', function (req, res) {
   console.log("got into search function");
   axios({
       "method":"GET",
@@ -33,7 +33,7 @@ app.get('/', function (req, res) {
       })
       .then((response)=>{
         console.log(response);
-        res.json(response)
+        res.json(response.data)
       })
       .catch((error)=>{
         console.log(error)
