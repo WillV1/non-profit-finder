@@ -139,12 +139,11 @@ $(document).ready(function () {
           console.log("searchTerm");
         console.log(name);
     
-   const response = axios({
+   axios({
         method: 'post',
         url: '/',
         data: {
-          name: name,
-          response: response,
+         reponse: name
         }
       })
 
