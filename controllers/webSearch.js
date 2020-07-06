@@ -2,7 +2,7 @@ const express = require("express");
 const axios = require("axios");
 const router = express.Router();
 
-router.get("/", (req, res) => {
+router.get("https://contextualwebsearch-websearch-v1.p.rapidapi.com/api/Search/WebSearchAPI", (req, res) => {
 
 axios({
     "method":"GET",

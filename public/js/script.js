@@ -141,7 +141,7 @@ $(document).ready(function () {
     
    axios({
         method: 'post',
-        url: '/',
+        url: 'https://contextualwebsearch-websearch-v1.p.rapidapi.com/api/Search/WebSearchAPI',
         data: {
          reponse: name
         }
