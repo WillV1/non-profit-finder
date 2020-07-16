@@ -12,4 +12,4 @@ API call to Charity Navigation providing a randomly generated list of ten not-fo
 
 Local storage functionality allowing the user to enter and retrieve up to five most recent searches at any time for later reference.
 
-Please see deployed application at: https://willv1.github.io/charity-finder/index.html.
+Please see deployed application at: https://non-profit-finder-wv.herokuapp.com/.
